@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f5f6ef">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="description" content="A tiny nudge to leave your desk and take a gentle outdoor movement break.">
+    <title>UnSit — take a little outside break</title>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="UnSit home">
+          <span class="brand-mark" aria-hidden="true">u.</span>
+          <span>unsit</span>
+        </a>
+        <div class="privacy-pill"><span class="privacy-dot"></span> Your info stays private</div>
+      </header>
+
+      <main id="main-content">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="sun-icon" aria-hidden="true">✳</span> A small break, a little more outside</p>
+            <h1 id="hero-title">Your chair can<br><span>wait a minute.</span></h1>
+            <p class="hero-description">Get a gentle movement idea, step away from your screen, and come back when you’re ready.</p>
+            <button id="start-button" class="button button-primary" type="button">
+              <span aria-hidden="true">↗</span> I need to touch grass
+            </button>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-sun"></div>
+            <div class="art-cloud cloud-one"></div>
+            <div class="art-cloud cloud-two"></div>
+            <div class="art-hill hill-back"></div>
+            <div class="art-hill hill-front"></div>
+            <div class="art-path"></div>
+            <span class="art-sparkle sparkle-one">✳</span>
+            <span class="art-sparkle sparkle-two">✳</span>
+            <span class="art-caption">outside is<br>closer than it feels</span>
+          </div>
+        </section>
+
+        <section class="stats-row" aria-label="Your activity">
+          <article class="stat-card">
+            <div id="week-ring" class="progress-ring progress-ring-green" role="img" aria-label="0 of 5 weekly goal breaks"><span aria-hidden="true">↗</span></div>
+            <div><p class="stat-label">This week</p><p class="stat-value"><span id="week-count">0</span> <span class="stat-unit">breaks</span></p><p class="stat-subtext">of 5 weekly goal</p></div>
+          </article>
+          <article class="stat-card">
+            <div id="streak-ring" class="progress-ring progress-ring-yellow" role="img" aria-label="0 day streak"><span aria-hidden="true">✳</span></div>
+            <div><p class="stat-label">Current streak</p><p class="stat-value"><span id="streak-count">0</span> <span class="stat-unit">days</span></p><p class="stat-subtext">one day at a time</p></div>
+          </article>
+          <article class="stat-card stat-card-note">
+            <div class="quote-mark" aria-hidden="true">“</div>
+            <p>A little fresh air<br>counts as a big win.</p>
+          </article>
+        </section>
+
+        <section id="builder" class="builder-section" aria-labelledby="builder-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Your reset, your way</p>
+              <h2 id="builder-title">What sounds good?</h2>
+            </div>
+            <span class="tiny-label">NO LOGIN. NO PRESSURE.</span>
+          </div>
+          <form id="preferences-form" class="preference-panel">
+            <fieldset class="control-group">
+              <legend>How much time have you got?</legend>
+              <div class="segmented-control" role="group" aria-label="Challenge duration">
+                <label><input type="radio" name="duration" value="5"><span>5 <small>min</small></span></label>
+                <label><input type="radio" name="duration" value="10" checked><span>10 <small>min</small></span></label>
+                <label><input type="radio" name="duration" value="15"><span>15 <small>min</small></span></label>
+              </div>
+            </fieldset>
+            <fieldset class="control-group">
+              <legend>What’s your energy like?</legend>
+              <div class="segmented-control energy-control" role="group" aria-label="Energy level">
+                <label><input type="radio" name="energy" value="low"><span>Low-key</span></label>
+                <label><input type="radio" name="energy" value="steady" checked><span>Steady</span></label>
+                <label><input type="radio" name="energy" value="upbeat"><span>Up for it</span></label>
+              </div>
+            </fieldset>
+            <div class="select-row">
+              <label class="select-control">
+                <span>Focus today</span>
+                <select name="focus">
+                  <option value="lower-back">Lower back</option>
+                  <option value="hips">Tight hips</option>
+                  <option value="whole-body">Whole body</option>
+                </select>
+              </label>
+              <label class="select-control">
+                <span>Where are you headed?</span>
+                <select name="setting">
+                  <option value="anywhere">Anywhere outdoors</option>
+                  <option value="green-space">A park or green space</option>
+                  <option value="porch">A porch or balcony</option>
+                </select>
+              </label>
+            </div>
+            <details class="comfort-options">
+              <summary>Anything feeling uncomfortable?</summary>
+              <label class="comfort-label" for="discomfort">Your answer stays on this device.</label>
+              <select id="discomfort" name="discomfort">
+                <option value="none">No discomfort</option>
+                <option value="mild">A little stiffness</option>
+                <option value="moderate">More than a little</option>
+              </select>
+            </details>
+            <button id="generate-button" class="button button-dark" type="submit">Make me a little challenge <span aria-hidden="true">→</span></button>
+            <p class="form-note">Not medical advice. Keep it comfortable, and skip anything that doesn’t feel right.</p>
+          </form>
+        </section>
+
+        <section id="challenge-section" class="challenge-section" aria-live="polite" hidden>
+          <div class="section-heading challenge-heading">
+            <div><p class="eyebrow" id="challenge-source">A little plan for you</p><h2 id="challenge-title">Your reset</h2></div>
+            <span id="challenge-duration" class="duration-badge"></span>
+          </div>
+          <p id="challenge-focus" class="challenge-focus"></p>
+          <div id="style-list" class="style-grid"></div>
+          <div class="challenge-actions">
+            <button id="begin-button" class="button button-primary" type="button" disabled>Choose a style to begin <span aria-hidden="true">→</span></button>
+            <button id="new-challenge-button" class="text-button" type="button">Try different options</button>
+          </div>
+          <p class="put-away-note"><span aria-hidden="true">☼</span> Your plan is saved here. Lock your phone when you’re ready.</p>
+        </section>
+
+        <section id="active-section" class="active-section" aria-live="polite" hidden>
+          <p class="eyebrow">You made it outside</p>
+          <h2 id="active-title">Take your time.</h2>
+          <div class="timer-wrap">
+            <div id="timer-progress" class="timer-progress"><span id="timer-text">10:00</span></div>
+            <p id="timer-style" class="timer-style"></p>
+          </div>
+          <p class="active-instruction" id="active-instruction"></p>
+          <p id="timer-caption" class="timer-caption">The timer keeps its place if you lock your screen.</p>
+          <div class="active-actions">
+            <button id="finish-button" class="button button-primary" type="button">I’m back</button>
+            <button id="pause-button" class="text-button" type="button">Pause timer</button>
+          </div>
+        </section>
+
+        <section id="checkin-section" class="checkin-section" aria-live="polite" hidden>
+          <p class="eyebrow">Welcome back</p>
+          <h2>How are you feeling?</h2>
+          <p class="checkin-copy">A quick check-in, just for you. This isn’t a medical score.</p>
+          <div class="feeling-options" role="group" aria-label="How you feel after your break">
+            <button class="feeling-button" type="button" data-feeling="better"><span aria-hidden="true">☀</span> A little better</button>
+            <button class="feeling-button" type="button" data-feeling="same"><span aria-hidden="true">〰</span> About the same</button>
+            <button class="feeling-button" type="button" data-feeling="worse"><span aria-hidden="true">☁</span> Not so great</button>
+          </div>
+          <button id="skip-checkin" class="text-button" type="button">Skip check-in</button>
+        </section>
+
+        <section class="history-section" aria-labelledby="history-title">
+          <div class="section-heading history-heading">
+            <div><p class="eyebrow">Little things add up</p><h2 id="history-title">Recent fresh air</h2></div>
+            <button id="clear-history" class="text-button clear-button" type="button" hidden>Clear history</button>
+          </div>
+          <div id="history-list" class="history-list"></div>
+        </section>
+        <aside id="privacy-note" class="privacy-note">
+          <strong>Your information stays private.</strong> Your plans and check-ins are saved on this device. UnSit doesn’t send your personal information to the cloud.
+        </aside>
+      </main>
+      <footer class="footer"><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true">u.</span><span>unsit</span></a><span>Built for breaks, not screen time.</span><a href="#privacy-note">A note on privacy</a></footer>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </div>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

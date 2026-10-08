@@ -1,0 +1,14 @@
+{
+  "name": "unsit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "check": "node --check server.js && node --check challenge.js && node --check public/app.js && node --check public/offline-challenge.js && node --check public/service-worker.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

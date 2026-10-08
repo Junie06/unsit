@@ -1,0 +1,17 @@
+{
+  "name": "UnSit — a little outside break",
+  "short_name": "UnSit",
+  "description": "Local-first outdoor movement breaks for long days at a desk.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f6ef",
+  "theme_color": "#f5f6ef",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
