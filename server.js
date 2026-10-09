@@ -14,7 +14,7 @@ import {
 const root = fileURLToPath(new URL(".", import.meta.url));
 const publicRoot = resolve(root, "public");
 const port = Number(process.env.PORT || 3000);
-const host = process.env.HOST || "127.0.0.1";
+const host = process.env.HOST || (process.env.PORT ? "0.0.0.0" : "127.0.0.1");
 const ollamaHost = process.env.OLLAMA_HOST || "http://127.0.0.1:11434";
 const ollamaModel = process.env.OLLAMA_MODEL || "gemma2:2b";
 const mimeTypes = {
