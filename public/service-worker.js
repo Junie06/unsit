@@ -1,9 +1,12 @@
-const CACHE_NAME = "unsit-shell-v9";
+const CACHE_NAME = "unsit-shell-v10";
 const APP_SHELL = [
   "/",
   "/styles.css",
   "/app.js",
   "/offline-challenge.js",
+  "/challenge-core.js",
+  "/gemma-client.js",
+  "/gemma-worker.js",
   "/manifest.webmanifest",
   "/favicon.svg"
 ];

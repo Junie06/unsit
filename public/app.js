@@ -1,4 +1,5 @@
 import { fallbackChallenge } from "./offline-challenge.js";
+import { generateGemmaChallenge } from "./gemma-client.js";
 
 const STORAGE_KEY = "unsit.v1";
 const WEEKLY_GOAL = 5;
@@ -77,7 +78,7 @@ function renderChallenge(challenge, sessionId) {
   document.querySelector("#challenge-title").textContent = challenge.title;
   document.querySelector("#challenge-duration").textContent = `${challenge.durationMinutes} MIN`;
   document.querySelector("#challenge-focus").textContent = `Focus: ${challenge.focus}. Choose whichever version feels right.`;
-  document.querySelector("#challenge-source").textContent = challenge.source === "gemma-local"
+  document.querySelector("#challenge-source").textContent = ["gemma-local", "gemma-browser"].includes(challenge.source)
     ? "Made by Gemma on this device"
     : "A ready-to-go local plan";
   const styleList = document.querySelector("#style-list");
@@ -223,11 +224,26 @@ function resumeActive() {
 async function createChallenge() {
   const button = document.querySelector("#generate-button");
   button.disabled = true;
-  button.textContent = "Making your options…";
+  button.textContent = "Preparing your options…";
   try {
     const preferences = getPreferences();
-    let result = fallbackChallenge(preferences);
-    if (["localhost", "127.0.0.1", "::1"].includes(location.hostname)) {
+    const useGemma = document.querySelector("#use-gemma").checked;
+    let result;
+    let gemmaUnavailable = false;
+    if (useGemma) {
+      try {
+        result = await generateGemmaChallenge(preferences, (progress) => {
+          button.textContent = progress || "Loading Gemma…";
+        });
+      } catch (error) {
+        console.warn(`Using the built-in plan because browser Gemma is unavailable: ${error.message}`);
+        gemmaUnavailable = true;
+        result = fallbackChallenge(preferences);
+      }
+    } else {
+      result = fallbackChallenge(preferences);
+    }
+    if (!useGemma && ["localhost", "127.0.0.1", "::1"].includes(location.hostname)) {
       try {
         const response = await fetch("/api/challenge", {
           method: "POST",
@@ -237,8 +253,11 @@ async function createChallenge() {
         if (!response.ok) throw new Error(`Local challenge service returned HTTP ${response.status}.`);
         result = await response.json();
       } catch (error) {
-        console.warn(`Using an on-device plan because local Gemma is unavailable: ${error.message}`);
+        console.warn(`Using the built-in plan because local Ollama is unavailable: ${error.message}`);
       }
+    }
+    if (result.source === "local-plan") {
+      result = fallbackChallenge(preferences);
     }
     const session = {
       id: crypto.randomUUID(),
@@ -252,7 +271,15 @@ async function createChallenge() {
     currentSessionId = session.id;
     persistState();
     renderChallenge(result, session.id);
-    showToast(result.source === "gemma-local" ? "Made locally with Gemma. Your plan is saved on this device." : "Your offline-ready local plan is ready.");
+    if (result.source === "gemma-browser") {
+      showToast("Gemma made this plan on your device. Your plan is saved in this browser.");
+    } else if (result.source === "gemma-local") {
+      showToast("Made locally with Gemma through Ollama. Your plan is saved on this device.");
+    } else if (gemmaUnavailable) {
+      showToast("Gemma couldn't run here. Your built-in offline plan is ready.");
+    } else {
+      showToast("Your offline-ready local plan is ready.");
+    }
   } catch (error) {
     console.error("Challenge generation failed:", error);
     showToast(error.message || "Couldn’t connect to UnSit. Try again.");
