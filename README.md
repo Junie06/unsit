@@ -16,22 +16,6 @@ npm start
 
 Open [http://127.0.0.1:3000](http://127.0.0.1:3000). The app works without Ollama using its built-in movement plans.
 
-To generate suggestions with local Gemma, install Ollama, then run:
-
-```powershell
-ollama pull gemma2:2b
-npm start
-```
-
-UnSit uses `gemma2:2b` by default. To choose another model already installed in Ollama, set `OLLAMA_MODEL` before starting the app:
-
-```powershell
-$env:OLLAMA_MODEL = "gemma2:9b"
-npm start
-```
-
-If Ollama is unavailable or its response is not valid, UnSit uses a built-in plan. It does not fall back to a cloud AI API. The app server listens on `127.0.0.1`; the Ollama connection stays on the same device.
-
 ## Privacy and offline use
 
 - No login or account is required.

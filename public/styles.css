@@ -175,6 +175,9 @@ h2 { margin-bottom: 0; font-size: 29px; line-height: 1.2; }
   .privacy-pill { font-size: 10px; }
   .hero { padding-top: 34px; }
   h1 { font-size: 43px; }
+  .text-button { min-height: 44px; }
+  .comfort-options summary { min-height: 44px; padding: 12px 0; }
+  .select-control select, .comfort-options select { min-height: 44px; font-size: 16px; }
   .section-heading { align-items: start; }
   .tiny-label { max-width: 90px; padding-top: 8px; font-size: 8px; text-align: right; }
   h2 { font-size: 25px; }
@@ -186,7 +189,15 @@ h2 { margin-bottom: 0; font-size: 29px; line-height: 1.2; }
   .active-section, .checkin-section { padding: 31px 15px; }
   .feeling-options { align-items: stretch; flex-direction: column; }
   .feeling-button { min-height: 45px; flex-direction: row; }
-  .footer { gap: 10px; font-size: 9px; }
+  .footer { flex-wrap: wrap; gap: 8px 10px; padding: 12px 0; font-size: 9px; }
+}
+
+@media (max-width: 360px) {
+  .app-shell { padding-right: max(16px, env(safe-area-inset-right)); padding-left: max(16px, env(safe-area-inset-left)); }
+  .stats-row { gap: 9px; }
+  .stat-card { gap: 9px; padding: 10px; }
+  .progress-ring { width: 36px; height: 36px; }
+  .stat-value { font-size: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -14,6 +14,7 @@ import {
 const root = fileURLToPath(new URL(".", import.meta.url));
 const publicRoot = resolve(root, "public");
 const port = Number(process.env.PORT || 3000);
+const host = process.env.HOST || "127.0.0.1";
 const ollamaHost = process.env.OLLAMA_HOST || "http://127.0.0.1:11434";
 const ollamaModel = process.env.OLLAMA_MODEL || "gemma2:2b";
 const mimeTypes = {
@@ -133,7 +134,7 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.listen(port, "127.0.0.1", () => {
-  console.log(`UnSit is running at http://127.0.0.1:${port}`);
+server.listen(port, host, () => {
+  console.log(`UnSit is listening on ${host}:${port}`);
   console.log(`Local model: ${ollamaModel} via ${ollamaHost}`);
 });
